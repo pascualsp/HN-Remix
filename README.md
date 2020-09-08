@@ -2,8 +2,8 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 # Hacker News Remix
 
-`Currently WIP`
+**WIP**
 
-A simple React App that loads Hacker News stories on a redesigned interface.
+A React Newsreader for [Hacker News](https://news.ycombinator.com/).
 
-To try this project, clone the repository and run npm start in the directory.
+To try this project, clone the repository and run `npm start` in the directory.

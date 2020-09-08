@@ -20,12 +20,18 @@ const App = () => {
     getStories();
   }, []);
 
+  // TODO: MOVE SCROLLBAR TO CORRECT POSITION AFTER LOADBUTTON PRESS RATHER THAN STAYING AT BOTTOM
+
   return (
     <div>
       <GlobalStyle />
-      <HeaderTitle>Hacker News <span className="remix">Remix</span></HeaderTitle>
-      <StoryList storyIDs={storyIDs.slice(0, count)} count={count} />
-      <LoadButton onClick={loadStories}>Load more stories</LoadButton>
+      <div className="content-section">
+        <HeaderTitle>Hacker News <span className="remix">Remix</span></HeaderTitle>
+        <StoryList storyIDs={storyIDs.slice(0, count)} count={count} />
+      </div>
+      <div className="centered">
+        <LoadButton onClick={loadStories}>LOAD MORE STORIES</LoadButton>
+      </div>
     </div>
   );
 }

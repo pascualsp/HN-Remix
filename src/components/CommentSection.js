@@ -35,20 +35,21 @@ const CommentSection = ({ show, handleShow, story }) => {
         return null;
     }
 
-    // TODO: TURN COMMENTHEADER INTO A FIXED POSITION NAVBAR WITH A CLOSE BUTTON
-    //       MAKE CLOSEBUTTON POSITION DYNAMIC RATHER THAN CURRENT HARDCODED POSTION
+    // TODO: MAKE CLOSEBUTTON POSITION DYNAMIC RATHER THAN CURRENT HARDCODED POSTION
 
     return (
         <CommentModal>
             <div className="modal-main">
                 <CommentHeader>
-                    <a href={story.url} target="_blank" rel="noopener noreferrer">
-                        {story.title}
-                    </a>
-                    <MetaInfo>submitted {getPostTime(story.time)} ago by {story.by}</MetaInfo>
+                    <div>
+                        <a href={story.url} target="_blank" rel="noopener noreferrer">
+                            {story.title}
+                        </a>
+                        <MetaInfo>submitted {getPostTime(story.time)} ago by {story.by}</MetaInfo>
+                    </div>
+                    <CloseButton onClick={handleShow}>CLOSE</CloseButton>
                 </CommentHeader>
                 {story.kids !== undefined ? comments : <p>no comments yet</p>}
-                <CloseButton onClick={handleShow}>X CLOSE</CloseButton>
             </div>
         </CommentModal>
     );

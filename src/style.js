@@ -9,6 +9,13 @@ export const GlobalStyle = createGlobalStyle`
         font-family: 'Poppins', sans-serif;
         color: white;
         font-size: 19px;
+        margin: 0;
+    }
+
+    @media only screen and (max-width: 1200px) {
+        body {
+            font-size: 16px;
+        }
     }
 
     a {
@@ -21,10 +28,9 @@ export const GlobalStyle = createGlobalStyle`
     }
 
     .content-section {
-        background-color: hsl(20, 2%, 15%);
+        background-color: hsl(20, 2%, 17%);
         max-width: 1200px;
         margin: auto;
-        margin-top: -8px;
         padding: 5px 15px;
     }
 
@@ -39,7 +45,7 @@ export const HeaderTitle = styled.h1`
     line-height: 100%;
     margin: 18px 0 20px 0;
     padding-bottom: 9px;
-    border-bottom: 1px solid rgba(255, 102, 0, 1);
+    border-bottom: 2px solid rgba(255, 102, 0, 1);
 
     .remix {
         color: hsl(24, 69%, 50%);
@@ -63,7 +69,7 @@ export const StorySection = styled.div`
 `;
 
 export const MetaInfo = styled.p`
-    color: hsl(24, 25%, 50%);
+    color: hsl(24, 32%, 50%);
     font-size: 0.75em;
     margin: 0;
 `;
@@ -79,20 +85,29 @@ export const CommentModal = styled.div`
 
     .modal-main {
         max-width: 1280px;
-        background-color: hsl(20, 2%, 15%);
+        background-color: hsl(20, 2%, 17%);
         margin: auto auto 100px auto;
         padding: 5px 15px;
     }
 `
 
 export const CommentHeader = styled.div`
-    border-bottom: 1px solid rgba(255, 102, 0, 1);
-    margin: 17px 0 30px 0;
-    padding-bottom: 10px;
+    position: sticky;
+    display: flex;
+    justify-content: space-between;
+    top: 0;
+    background-color: hsl(20, 2%, 17%);
+    border-bottom: 2px solid rgba(255, 102, 0, 1);
+    margin-bottom: 25px;
+    padding: 17px 0 10px 0;
 `
 
 export const CommentContent = styled.div`
-    margin-bottom: 35px;
+    margin: 0 1px 30px 1px;
+
+    @media only screen and (max-width: 1200px) {
+        margin-bottom: 15px;
+    }
 `
 
 export const CommentText = styled.p`
@@ -102,30 +117,49 @@ export const CommentText = styled.p`
     * {
         margin: 0 0 8px 0;
     }
+
+    a {
+        display: inline-block;
+        max-width: 90%;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        vertical-align: top;
+        margin: 0;
+    }
 `;
 
 export const ReplyContent = styled.div`
-    margin-top: 18px;
+    margin-top: 17px;
     margin-left: ${props => props.spacing * 42}px;
+
+    @media only screen and (max-width: 1200px) {
+        margin-top: 10px;
+        margin-left: ${props => props.spacing * 16}px;
+    }
 `
 
 export const CloseButton = styled.button`
-    position: fixed;
-    top: 15px;
-    right: 180px;
+    align-self: center;
     border: 1px solid rgba(255, 102, 0, 1);
     background-color: transparent;
     color: rgba(255, 102, 0, 1);
-    font-size: 19px;
+    font-size: inherit;
     letter-spacing: 1px;
-    padding: 12px;
+    padding: 10px;
+    margin-left: 5px;
+
+    @media only screen and (max-width: 1200px) {
+        font-size: 0.75em;
+        padding: 8x;
+    }
 `;
 
 export const LoadButton = styled.button`
     border: 1px solid rgba(255, 102, 0, 1);
     background-color: transparent;
     color: rgba(255, 102, 0, 1);
-    font-size: 19px;
+    font-size: inherit;
     letter-spacing: 1px;
     padding: 12px;
     margin: 30px 0 30px 0;

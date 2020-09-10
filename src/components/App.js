@@ -6,6 +6,7 @@ import axios from 'axios';
 const App = () => {
   const [storyIDs, setStoryIDs] = useState([]);
   const [count, setCount] = useState(20);
+  const [position, setPosition] = useState(0);
 
   const getStories = async () => {
     const response = await axios.get("https://hacker-news.firebaseio.com/v0/topstories.json");
@@ -13,14 +14,17 @@ const App = () => {
   };
 
   const loadStories = async () => {
-    setCount(count + 10);
+    setPosition(document.documentElement.scrollTop);
+    setCount(count + 20);
   };
 
   useEffect(() => {
     getStories();
   }, []);
 
-  // TODO: MOVE SCROLLBAR TO CORRECT POSITION AFTER LOADBUTTON PRESS RATHER THAN STAYING AT BOTTOM
+  useEffect(() => {
+    document.documentElement.scrollTop = position;
+  }, [count, position]);
 
   return (
     <div>

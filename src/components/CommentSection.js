@@ -10,7 +10,9 @@ const CommentSection = ({ show, handleShow, story }) => {
 
     const getCommentData = async () => {
         const response = await axios.get("https://hn.algolia.com/api/v1/items/" + story.id);
-        setCommentData(response.data.children);
+        setCommentData(response.data.children.sort((a, b) => {
+            return b.created_at_i - a.created_at_i;
+        }));
     };
 
     useEffect(() => {
@@ -34,8 +36,6 @@ const CommentSection = ({ show, handleShow, story }) => {
     if (!show) {
         return null;
     }
-
-    // TODO: MAKE CLOSEBUTTON POSITION DYNAMIC RATHER THAN CURRENT HARDCODED POSTION
 
     return (
         <CommentModal>

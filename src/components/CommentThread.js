@@ -8,6 +8,10 @@ const CommentThread = ({ cd }) => {
     const getReplies = (comment, index, spacing) => {
         let currentComments = [];
 
+        comment = comment.sort((a, b) => {
+            return b.created_at_i - a.created_at_i;
+        });
+
         if (comment[index].author !== null) {
             currentComments.push(
                 <ReplyContent key={comment[index].id} spacing={spacing}>
@@ -17,12 +21,12 @@ const CommentThread = ({ cd }) => {
             );
 
             if (comment[index].children !== undefined && comment[index].children.length > 0) {
-                currentComments = currentComments.concat(getReplies(comment[index].children, 0, spacing + 1));
+                currentComments = [...currentComments, ...getReplies(comment[index].children, 0, spacing + 1)];
             }
         }
 
         if (index < comment.length-1) {
-            currentComments = currentComments.concat(getReplies(comment, index + 1, spacing));
+            currentComments = [...currentComments, ...getReplies(comment, index + 1, spacing)];
         }
 
         return currentComments;

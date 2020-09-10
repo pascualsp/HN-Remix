@@ -2,8 +2,6 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 # Hacker News Remix
 
-**WIP**
-
 A React Newsreader for [Hacker News](https://news.ycombinator.com/).
 
-To try this project, clone the repository and run `npm start` in the directory.
+[Click here to try it out!](https://hn-remix.netlify.app/)

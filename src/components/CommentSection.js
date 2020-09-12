@@ -1,11 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import CommentThread from './CommentThread';
-import { CommentModal, CommentHeader, MetaInfo, CloseButton } from '../style.js'
+import { CommentModal, CommentHeader, MetaInfo, CloseButton, Loader } from '../style.js'
 import { getPostTime } from './getPostTime';
 import axios from 'axios';
 
 const CommentSection = ({ show, handleShow, story }) => {
-    const [comments, setComments] = useState(<p>loading comments...</p>);
+    const [comments, setComments] = useState(
+        <div className="centered">
+            <Loader/>
+        </div>
+    );
     const [commentData, setCommentData] = useState(null);
 
     const getCommentData = async () => {
@@ -49,7 +53,7 @@ const CommentSection = ({ show, handleShow, story }) => {
                     </div>
                     <CloseButton onClick={handleShow}>CLOSE</CloseButton>
                 </CommentHeader>
-                {story.kids !== undefined ? comments : <p>no comments yet</p>}
+                {story.kids !== undefined ? comments : <div className="centered"><p>no comments yet</p></div>}
             </div>
         </CommentModal>
     );

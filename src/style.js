@@ -1,4 +1,4 @@
-import styled, {createGlobalStyle} from 'styled-components';
+import styled, { createGlobalStyle, keyframes } from 'styled-components';
 
 export const GlobalStyle = createGlobalStyle`
     html {
@@ -14,7 +14,7 @@ export const GlobalStyle = createGlobalStyle`
 
     @media only screen and (max-width: 1200px) {
         body {
-            font-size: 16px;
+            font-size: 15px;
         }
     }
 
@@ -60,8 +60,14 @@ export const StorySection = styled.div`
         max-width: max-content;
         color: hsl(24, 25%, 75%);
         margin: 0;
-        font-size: 0.75em;
+        font-size: 0.80em;
     }
+
+    @media only screen and (max-width: 1200px) {
+        .comments-button {
+            font-size: 0.92em;
+        }
+    }    
 
     .comments-button:hover {
         cursor: pointer;
@@ -70,7 +76,7 @@ export const StorySection = styled.div`
 
 export const MetaInfo = styled.p`
     color: hsl(24, 32%, 50%);
-    font-size: 0.75em;
+    font-size: 0.80em;
     margin: 0;
 `;
 
@@ -119,6 +125,7 @@ export const CommentText = styled.p`
     }
 
     a {
+        color: hsl(24, 25%, 75%);
         display: inline-block;
         max-width: 90%;
         white-space: nowrap;
@@ -126,6 +133,10 @@ export const CommentText = styled.p`
         overflow: hidden;
         vertical-align: top;
         margin: 0;
+    }
+
+    code {
+        white-space: pre-wrap;
     }
 `;
 
@@ -147,7 +158,7 @@ export const CloseButton = styled.button`
     font-size: inherit;
     letter-spacing: 1px;
     padding: 10px;
-    margin-left: 5px;
+    margin-left: 8px;
 
     @media only screen and (max-width: 1200px) {
         font-size: 0.75em;
@@ -164,3 +175,21 @@ export const LoadButton = styled.button`
     padding: 12px;
     margin: 30px 0 30px 0;
 `;
+
+const rotate = keyframes`
+    from {
+        transform: rotate(0deg);
+    } to {
+        transform: rotate(360deg);
+    }
+`;
+
+export const Loader = styled.div`
+    border: 7px solid #cfbcaf;
+    border-radius: 50%;
+    border-top: 7px solid #ff6600;
+    width: 22px;
+    height: 22px;
+    margin-bottom: 20px;
+    animation: ${rotate} 1s linear infinite;
+`

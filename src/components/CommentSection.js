@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import StoryText from './StoryText';
 import CommentThread from './CommentThread';
 import { CommentModal, CommentHeader, MetaInfo, CloseButton, Loader } from '../style.js'
 import { getPostTime } from './getPostTime';
@@ -53,6 +54,7 @@ const CommentSection = ({ show, handleShow, story }) => {
                     </div>
                     <CloseButton onClick={handleShow}>CLOSE</CloseButton>
                 </CommentHeader>
+                <StoryText text={story.text} />
                 {story.kids !== undefined ? comments : <div className="centered"><p>no comments yet</p></div>}
             </div>
         </CommentModal>

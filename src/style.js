@@ -116,6 +116,11 @@ export const CommentContent = styled.div`
     }
 `
 
+export const StoryContent = styled(CommentContent)`
+    padding-bottom: 20px;
+    border-bottom: 2px solid rgba(255, 102, 0, 1);
+`
+
 export const CommentText = styled.p`
     font-size: 0.9em;
     margin: 0;

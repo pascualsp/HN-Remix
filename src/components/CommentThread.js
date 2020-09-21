@@ -5,11 +5,13 @@ import { getPostTime } from './getPostTime';
 const CommentThread = ({ cd }) => {
     const [replies, setReplies] = useState(null);
 
+    // Recursive function that generates a comment's replies
     const getReplies = (comment, index, spacing) => {
         let currentComments = [];
 
+        // Replies are sorted by oldest first
         comment = comment.sort((a, b) => {
-            return b.created_at_i - a.created_at_i;
+            return a.created_at_i - b.created_at_i;
         });
 
         if (comment[index].author !== null) {

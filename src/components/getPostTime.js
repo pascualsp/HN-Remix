@@ -1,3 +1,4 @@
+// Generates timestamp from Unix Time code
 export const getPostTime = (time) => {
     const seconds = Math.floor((new Date().getTime() / 1000 ) - time);
 

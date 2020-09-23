@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import StoryText from './StoryText';
 import CommentThread from './CommentThread';
-import { CommentModal, CommentHeader, MetaInfo, CloseButton, Loader } from '../style.js'
+import { CommentModal, CommentHeader, SiteSource, MetaInfo, CloseButton, Loader } from '../style.js'
 import { getPostTime } from './getPostTime';
 import axios from 'axios';
 
-const CommentSection = ({ show, handleShow, story }) => {
+const CommentSection = ({ show, handleShow, story, source }) => {
     const [comments, setComments] = useState(
         <div className="centered">
             <Loader/>
@@ -54,6 +54,7 @@ const CommentSection = ({ show, handleShow, story }) => {
                         <a href={story.url} target="_blank" rel="noopener noreferrer">
                             {story.title}
                         </a>
+                        <SiteSource>{source}</SiteSource>
                         <MetaInfo>submitted {getPostTime(story.time)} ago by {story.by}</MetaInfo>
                     </div>
                     <CloseButton onClick={handleShow}>CLOSE</CloseButton>

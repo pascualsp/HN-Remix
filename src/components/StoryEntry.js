@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import CommentSection from './CommentSection';
-import { StorySection, MetaInfo } from '../style.js';
+import { StorySection, SiteSource, MetaInfo } from '../style.js';
 import { getPostTime } from './getPostTime';
 import axios from 'axios';
 
@@ -28,14 +28,18 @@ const StoryEntry = ({ storyID }) => {
         getStory();
     }, []);
 
+    // Gets the domain and subdomain of the source from the story URL
+    const source = (story.url !== undefined ? " (" + story.url.replace('http://','').replace('https://','').replace('www.','').split(/[/?#]/)[0] + ")" : null);
+
     return (
         <StorySection>
             <a href={story.url} target="_blank" rel="noopener noreferrer">
                 {story.title}
             </a>
+            <SiteSource>{source}</SiteSource>
             <MetaInfo>submitted {getPostTime(story.time)} ago by {story.by}</MetaInfo>
             <p className="comments-button" onClick={() => toggleComments()}>{story.descendants || 0} comments</p>
-            <CommentSection show={toggle} handleShow={toggleComments} story={story} />
+            <CommentSection show={toggle} handleShow={toggleComments} story={story} source={source} />
         </StorySection>
     );
 }

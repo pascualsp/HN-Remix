@@ -74,6 +74,15 @@ export const StorySection = styled.div`
     }
 `;
 
+export const SiteSource = styled.span`
+    color: hsl(24, 25%, 75%);
+    font-size: 0.70em;
+
+    @media only screen and (max-width: 1200px) {
+        font-size: 0.75em;
+    }
+`;
+
 export const MetaInfo = styled.p`
     color: hsl(24, 32%, 50%);
     font-size: 0.80em;

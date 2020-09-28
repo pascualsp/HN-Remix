@@ -129,9 +129,14 @@ export const CommentContent = styled.div`
     }
 `
 
-export const StoryContent = styled(CommentContent)`
-    padding-bottom: 20px;
+export const StoryContent = styled.div`
+    margin: 0 1px 30px 1px;
+    padding-bottom: 18px;
     border-bottom: 1px solid rgba(255, 102, 0, 1);
+
+    @media only screen and (max-width: 1200px) {
+        margin-bottom: 15px;
+    }
 `
 
 export const CommentText = styled.p`

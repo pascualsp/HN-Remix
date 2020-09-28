@@ -6,7 +6,7 @@ const CommentThread = ({ cd }) => {
     const [replies, setReplies] = useState(null);
 
     // Recursive function that generates a comment's replies
-    const getReplies = (comment, index, spacing) => {
+    const getReplies = (comment, index) => {
         let currentComments = [];
 
         // Replies are sorted by oldest first
@@ -15,20 +15,22 @@ const CommentThread = ({ cd }) => {
         });
 
         if (comment[index].author !== null) {
+            let childComments = [];
+            if (comment[index].children !== undefined && comment[index].children.length > 0) {
+                childComments = [...childComments, ...getReplies(comment[index].children, 0)];
+            }
+
             currentComments.push(
-                <ReplyContent key={comment[index].id} spacing={spacing}>
+                <ReplyContent key={comment[index].id}>
                     <MetaInfo>{comment[index].author} {getPostTime(comment[index].created_at_i)} ago</MetaInfo>
                     <CommentText dangerouslySetInnerHTML={{ __html: comment[index].text }} />
+                    {childComments}
                 </ReplyContent>
             );
-
-            if (comment[index].children !== undefined && comment[index].children.length > 0) {
-                currentComments = [...currentComments, ...getReplies(comment[index].children, 0, spacing + 1)];
-            }
         }
 
         if (index < comment.length-1) {
-            currentComments = [...currentComments, ...getReplies(comment, index + 1, spacing)];
+            currentComments = [...currentComments, ...getReplies(comment, index + 1)];
         }
 
         return currentComments;

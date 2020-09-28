@@ -118,10 +118,14 @@ export const CommentHeader = styled.div`
 `
 
 export const CommentContent = styled.div`
-    margin: 0 1px 30px 1px;
+    margin: 0 1px 30px 0;
+    padding-left: 10px;
+    border-left: 1px solid rgba(255, 102, 0, 0.25);
 
     @media only screen and (max-width: 1200px) {
         margin-bottom: 15px;
+        padding-left: 6px;
+        border-left: 1px solid rgba(255, 102, 0, 0.15);
     }
 `
 
@@ -156,11 +160,15 @@ export const CommentText = styled.p`
 
 export const ReplyContent = styled.div`
     margin-top: 17px;
-    margin-left: ${props => props.spacing * 42}px;
+    margin-left: 24px;
+    padding-left: 10px;
+    border-left: 1px solid rgba(255, 102, 0, 0.25);
 
     @media only screen and (max-width: 1200px) {
         margin-top: 10px;
-        margin-left: ${props => props.spacing * 16}px;
+        margin-left: 8px;
+        padding-left: 6px;
+        border-left: 1px solid rgba(255, 102, 0, 0.15);
     }
 `
 

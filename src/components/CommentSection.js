@@ -24,8 +24,17 @@ const CommentSection = ({ show, handleShow, story, source }) => {
     };
 
     useEffect(() => {
-        if (show && story.kids !== undefined) {
-            getCommentData();
+        if (show) {
+            // Makes back button return to main page
+            window.history.pushState(null, null);
+            window.onpopstate = (e) => {
+                e.preventDefault();
+                handleShow();
+            }
+
+            if (story.kids !== undefined) {
+                getCommentData();
+            }
         }
     }, [show]);
 
@@ -57,7 +66,7 @@ const CommentSection = ({ show, handleShow, story, source }) => {
                         <SiteSource>{source}</SiteSource>
                         <MetaInfo>submitted {getPostTime(story.time)} ago by {story.by}</MetaInfo>
                     </div>
-                    <CloseButton onClick={handleShow}>CLOSE</CloseButton>
+                    <CloseButton onClick={() => window.history.back()}>CLOSE</CloseButton>
                 </CommentHeader>
                 <StoryText text={story.text} />
                 {story.kids !== undefined ? comments : <div className="centered"><p>no comments yet</p></div>}

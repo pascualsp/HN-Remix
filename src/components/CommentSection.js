@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import StoryText from './StoryText';
 import CommentThread from './CommentThread';
-import { CommentModal, CommentHeader, SiteSource, MetaInfo, CloseButton, Loader } from '../style.js'
+import { CommentModal, CommentHeader, SiteSource, MetaInfo, CloseButton, Loader, LoaderText } from '../style.js'
 import { getPostTime } from './getPostTime';
 import axios from 'axios';
 
@@ -9,6 +9,7 @@ const CommentSection = ({ show, handleShow, story, source }) => {
     const [comments, setComments] = useState(
         <div className="centered">
             <Loader/>
+            <LoaderText>Loading...</LoaderText>
         </div>
     );
     const [commentData, setCommentData] = useState(null);

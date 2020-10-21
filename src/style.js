@@ -165,13 +165,13 @@ export const CommentText = styled.p`
 
 export const ReplyContent = styled.div`
     margin-top: 17px;
-    margin-left: 24px;
+    margin-left: 18px;
     padding-left: 10px;
     border-left: 1px solid rgba(255, 102, 0, 0.25);
 
     @media only screen and (max-width: 1200px) {
         margin-top: 10px;
-        margin-left: 8px;
+        margin-left: 6px;
         padding-left: 6px;
         border-left: 1px solid rgba(255, 102, 0, 0.15);
     }
@@ -217,6 +217,12 @@ export const Loader = styled.div`
     border-top: 7px solid #ff6600;
     width: 22px;
     height: 22px;
+    margin-right: 8px;
     margin-bottom: 20px;
     animation: ${rotate} 1s linear infinite;
+`
+
+export const LoaderText = styled.p`
+    font-size: 18px;
+    margin: 4px 0 0 0;
 `

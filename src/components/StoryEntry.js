@@ -39,7 +39,7 @@ const StoryEntry = ({ storyID }) => {
             <SiteSource>{source}</SiteSource>
             <MetaInfo>submitted {getPostTime(story.time)} ago by {story.by}</MetaInfo>
             <p className="comments-button" onClick={() => toggleComments()}>{story.descendants || 0} comments</p>
-            <CommentSection show={toggle} handleShow={toggleComments} story={story} source={source} />
+            <CommentSection page={false} show={toggle} handleShow={toggleComments} story={story} source={source} />
         </StorySection>
     );
 }

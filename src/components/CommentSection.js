@@ -5,7 +5,7 @@ import { CommentModal, CommentHeader, SiteSource, MetaInfo, CloseButton, Loader,
 import { getPostTime } from './getPostTime';
 import axios from 'axios';
 
-const CommentSection = ({ show, handleShow, story, source }) => {
+const CommentSection = ({ page, show, handleShow, story, source }) => {
     const [comments, setComments] = useState(
         <div className="centered">
             <Loader/>
@@ -26,11 +26,13 @@ const CommentSection = ({ show, handleShow, story, source }) => {
 
     useEffect(() => {
         if (show) {
-            // Makes back button return to main page
-            window.history.pushState(null, null);
-            window.onpopstate = (e) => {
-                e.preventDefault();
-                handleShow();
+            // Changes URL to article's comment section URL
+            if (!page) {
+                window.history.pushState(null, null, "/story/" + story.id);
+                window.onpopstate = (e) => {
+                    e.preventDefault();
+                    handleShow();
+                }
             }
 
             if (story.kids !== undefined) {
@@ -67,7 +69,7 @@ const CommentSection = ({ show, handleShow, story, source }) => {
                         <SiteSource>{source}</SiteSource>
                         <MetaInfo>submitted {getPostTime(story.time)} ago by {story.by}</MetaInfo>
                     </div>
-                    <CloseButton onClick={() => window.history.back()}>CLOSE</CloseButton>
+                    <CloseButton onClick={() => (page ? window.location = "../" : window.history.back())}>CLOSE</CloseButton>
                 </CommentHeader>
                 <StoryText text={story.text} />
                 {story.kids !== undefined ? comments : <div className="centered"><p>no comments yet</p></div>}

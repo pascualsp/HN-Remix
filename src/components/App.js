@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
+import CommentPage from './CommentPage';
 import StoryList from './StoryList';
 import { GlobalStyle, HeaderTitle, LoadButton } from '../style.js';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import axios from 'axios';
 
 const App = () => {
@@ -30,16 +32,25 @@ const App = () => {
   }, [count, position]);
 
   return (
-    <div>
-      <GlobalStyle />
-      <div className="content-section">
-        <HeaderTitle>Hacker News <span className="remix">Remix</span></HeaderTitle>
-        <StoryList storyIDs={storyIDs.slice(0, count)} />
+    <Router>
+      <div>
+        <GlobalStyle />
+        <Switch>
+          <Route path="/story/:id">
+            <CommentPage />
+          </Route>
+          <Route path="/">
+            <div className="content-section">
+              <HeaderTitle>Hacker News <span className="remix">Remix</span></HeaderTitle>
+              <StoryList storyIDs={storyIDs.slice(0, count)} />
+            </div>
+            <div className="centered">
+              <LoadButton onClick={loadStories}>LOAD MORE STORIES</LoadButton>
+            </div>
+          </Route>
+        </Switch>
       </div>
-      <div className="centered">
-        <LoadButton onClick={loadStories}>LOAD MORE STORIES</LoadButton>
-      </div>
-    </div>
+    </Router>
   );
 }
 

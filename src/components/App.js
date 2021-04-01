@@ -17,7 +17,7 @@ const App = () => {
   };
 
   // Increases count which dictates how many stories are shown
-  const loadStories = async () => {
+  const loadStories = () => {
     setPosition(document.documentElement.scrollTop);
     setCount(count + 20);
   };

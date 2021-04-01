@@ -38,7 +38,7 @@ const CommentThread = ({ cd }) => {
 
     useEffect(() => {
         if (cd.children.length > 0) {
-            const replies = getReplies(cd.children, 0, 1);
+            const replies = getReplies(cd.children, 0);
             setReplies(replies);
         }
     }, []);

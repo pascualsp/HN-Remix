@@ -7,15 +7,15 @@ const CommentPage = () => {
     const { id } = useParams();
     const [story, setStory] = useState({});
 
-    // Gets story data from Hacker News API
-    const getStory = async () => {
-        const response = await axios.get("https://hacker-news.firebaseio.com/v0/item/" + id + ".json");
-        setStory(response.data);
-    };
-
     useEffect(() => {
+        // Gets story data from Hacker News API
+        const getStory = async () => {
+            const response = await axios.get(`https://hacker-news.firebaseio.com/v0/item/${id}.json`);
+            setStory(response.data);
+        };
+        
         getStory();
-    }, []);
+    }, [id]);
 
     const source = (story.url !== undefined ? " (" + story.url.replace('http://','').replace('https://','').replace('www.','').split(/[/?#]/)[0] + ")" : null);
 

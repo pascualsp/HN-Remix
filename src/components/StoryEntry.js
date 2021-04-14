@@ -8,12 +8,6 @@ const StoryEntry = ({ storyID }) => {
     const [story, setStory] = useState({});
     const [toggle, setToggle] = useState(false);
 
-    // Gets story data from Hacker News API
-    const getStory = async () => {
-        const response = await axios.get("https://hacker-news.firebaseio.com/v0/item/" + storyID + ".json");
-        setStory(response.data);
-    };
-
     // Toggles comments section display
     const toggleComments = () => {
         if (toggle) {
@@ -25,8 +19,14 @@ const StoryEntry = ({ storyID }) => {
     };
 
     useEffect(() => {
+        // Gets story data from Hacker News API
+        const getStory = async () => {
+            const response = await axios.get(`https://hacker-news.firebaseio.com/v0/item/${storyID}.json`);
+            setStory(response.data);
+        };
+
         getStory();
-    }, []);
+    }, [storyID]);
 
     // Gets the domain and subdomain of the source from the story URL
     const source = (story.url !== undefined ? " (" + story.url.replace('http://','').replace('https://','').replace('www.','').split(/[/?#]/)[0] + ")" : null);

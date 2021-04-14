@@ -14,17 +14,17 @@ const CommentSection = ({ page, show, handleShow, story, source }) => {
     );
     const [commentData, setCommentData] = useState(null);
 
-    // Gets comment data from Algolia's Hacker News Search API (offers more efficient comment loading than the official HN API)
-    const getCommentData = async () => {
-        const response = await axios.get("https://hn.algolia.com/api/v1/items/" + story.id);
-
-        // Comments are saved to state variable and sorted by newest first
-        setCommentData(response.data.children.sort((a, b) => {
-            return a.created_at_i - b.created_at_i;
-        }));
-    };
-
     useEffect(() => {
+        // Gets comment data from Algolia's Hacker News Search API (offers more efficient comment loading than the official HN API)
+        const getCommentData = async () => {
+            const response = await axios.get("https://hn.algolia.com/api/v1/items/" + story.id);
+
+            // Comments are saved to state variable and sorted by newest first
+            setCommentData(response.data.children.sort((a, b) => {
+                return a.created_at_i - b.created_at_i;
+            }));
+        };
+
         if (show) {
             // Changes URL to article's comment section URL
             if (!page) {
@@ -39,7 +39,7 @@ const CommentSection = ({ page, show, handleShow, story, source }) => {
                 getCommentData();
             }
         }
-    }, [show]);
+    }, [show, handleShow, page, story]);
 
     useEffect(() => {
         // Generates comment threads (comments + corresponding replies)

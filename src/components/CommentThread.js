@@ -5,43 +5,43 @@ import { getPostTime } from './getPostTime';
 const CommentThread = ({ cd }) => {
     const [replies, setReplies] = useState(null);
 
-    // Recursive function that generates a comment's replies
-    const getReplies = (comment, index) => {
-        let currentComments = [];
+    useEffect(() => {
+        // Recursive function that generates a comment's replies
+        const getReplies = (comment, index) => {
+            let currentComments = [];
 
-        // Replies are sorted by oldest first
-        comment = comment.sort((a, b) => {
-            return a.created_at_i - b.created_at_i;
-        });
+            // Replies are sorted by oldest first
+            comment = comment.sort((a, b) => {
+                return a.created_at_i - b.created_at_i;
+            });
 
-        if (comment[index].author !== null) {
-            let childComments = [];
-            if (comment[index].children !== undefined && comment[index].children.length > 0) {
-                childComments = [...childComments, ...getReplies(comment[index].children, 0)];
+            if (comment[index].author !== null) {
+                let childComments = [];
+                if (comment[index].children !== undefined && comment[index].children.length > 0) {
+                    childComments = [...childComments, ...getReplies(comment[index].children, 0)];
+                }
+
+                currentComments.push(
+                    <ReplyContent key={comment[index].id}>
+                        <MetaInfo>{comment[index].author} {getPostTime(comment[index].created_at_i)} ago</MetaInfo>
+                        <CommentText dangerouslySetInnerHTML={{ __html: comment[index].text }} />
+                        {childComments}
+                    </ReplyContent>
+                );
             }
 
-            currentComments.push(
-                <ReplyContent key={comment[index].id}>
-                    <MetaInfo>{comment[index].author} {getPostTime(comment[index].created_at_i)} ago</MetaInfo>
-                    <CommentText dangerouslySetInnerHTML={{ __html: comment[index].text }} />
-                    {childComments}
-                </ReplyContent>
-            );
+            if (index < comment.length-1) {
+                currentComments = [...currentComments, ...getReplies(comment, index + 1)];
+            }
+
+            return currentComments;
         }
 
-        if (index < comment.length-1) {
-            currentComments = [...currentComments, ...getReplies(comment, index + 1)];
-        }
-
-        return currentComments;
-    }
-
-    useEffect(() => {
         if (cd.children.length > 0) {
             const replies = getReplies(cd.children, 0);
             setReplies(replies);
         }
-    }, []);
+    }, [cd]);
 
     if (cd.author === null) {
         return null;
